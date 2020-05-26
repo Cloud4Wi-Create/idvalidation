@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-const https = require('https');
 const request = require('request');
 
 
@@ -11,15 +10,16 @@ router.get('/', function(req, res, next) {
 });
 
 
-
 router.post('/validate', function (req, res) {
   var ticket = req.body.ticket;
   console.log("ticket");
 
 
 /*
-  httpurl = 'http://www.mocky.io/v2/5ecca0603200002a00236205';
+  //API call to external verificaiton of code, ticket, etc..
+  //Expect a json response {"status":"valid"} or {"status":"invalid"}
 
+  httpurl = 'http://www.mocky.io/v2/5ecca0603200002a00236205';
   request.post({
     url: httpurl,
     json: {
@@ -43,7 +43,7 @@ router.post('/validate', function (req, res) {
     });
     */
 
-    
+
     // mock response for demo only
     if (ticket=="0603200002") {
       body = {"status":"valid"};

@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= title %></title>
+  <title>Verify your ticket</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src="https://splashportal.cloud4wi.com/myapps/v1/myapps-sdk.js"></script>
 </head>
 <body>
 
   <div id="intro">
     <h1>Insert your ticket</h1>
-  <p>For demo only, valid ticket is: 0603200002</p>
+    <p>For demo only, valid ticket is: 0603200002</p>
 
-    <!-- our form -->
-    <form id='userForm'>
+    <!-- form -->
+    <form id='Form'>
       <div>
         <input type='text' name='ticket' placeholder='Name' /></div>
       <div>
@@ -22,61 +21,61 @@
   </div>
   
 
-  <!-- where the response will be displayed -->
+  <!-- Respons in case of errors -->
   <div id='response'></div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+  <!-- Javascripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+  <script src="https://splashportal.cloud4wi.com/myapps/v1/myapps-sdk.js"></script>
 
 
-<script>
-$(document).ready(function(){
+  <!-- Handling form submit -->
+  <script>
+  $(document).ready(function(){
 
-  $('#userForm').submit(function(){
+    $('#Form').submit(function(){
 
-  // show that something is loading
-  $('#response').html("<b>Loading response...</b>");
+      // show that something is loading
+      $('#response').html("<b>VErifying your ticket...</b>");
 
+      // Call ajax for pass data to other place
+      $.ajax({
+      type: 'POST',
+      url: '/validate',
+      async: false,
+      data: $(this).serialize(), // getting filed value in serialize form
+      success: function (result) {
+          console.log("status: "+result.status);
+          if (result.status == 'valid') {
+            $('#intro').hide();
+            $('#response').html('Redirecting...');
+            MYAPPS.goNext();
+          }
+          else {
+            $('#response').html('Ticket is not valid');
+          }
+        },
+          error: function(result){
+            //console.log("error: "+result);
+            $('#response').html('Ticket is not valid');
+        }
 
-  // Call ajax for pass data to other place
-  $.ajax({
-  type: 'POST',
-  url: '/validate',
-  async: false,
-  data: $(this).serialize(), // getting filed value in serialize form
-  success: function (result) {
-      console.log("status: "+result.status);
-      if (result.status == 'valid') {
-        $('#intro').hide();
-        $('#response').html('Thanks. Redirecting in 3 sec');
-        MYAPPS.goNext();
-      }
-      else {
+      })
+
+      .fail(function() { // if fail then getting message
+        // just in case posting your form failed
         $('#response').html('Ticket is not valid');
-      }
-    },
-      error: function(result){
-        //console.log("error: "+result);
-        $('#response').html('Ticket is not valid');
-    }
 
-  })
+      });
 
-  .fail(function() { // if fail then getting message
-    // just in case posting your form failed
-    $('#response').html('Ticket is not valid');
+    // prevent refreshing the whole page page
+    return false;
+
+    });
 
   });
-
-
-
-  // to prevent refreshing the whole page page
-  return false;
-
-  });
-
-});
-</script>
+  </script>
 
 </body>
 </html>
