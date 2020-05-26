@@ -9,6 +9,9 @@ This is a simple app to ask for a valid identifier during the Access Journey (su
 
 ## Installation & Run on heroku
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+
 ```sh
 # Remove .git folder and start again
 rm -rf .git

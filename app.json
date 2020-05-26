@@ -1,0 +1,7 @@
+{
+    "name": "Custom Proof Validation",
+    "description": "Validate ticket number or loyaty card during acccess journey to grant internet accesss",
+    "repository": "https://github.com/Cloud4Wi-Create/idvalidation",
+    "logo": "http://compass.cloud4wi.com/media/c4w/c4w-logo-colored.png",
+    "keywords": ["node", "express", "static"]
+  }
