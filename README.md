@@ -1,13 +1,16 @@
 # Cloud4Wi MyApps boilerplate to verify a customer id to grant internet access
 This is a simple app to ask for a valid identifier during the Access Journey (such as a ticket number of a loyaty id) to let the user go online.
+You can clone this project and customize it or use the Heroku button below to deploy on your Heroku account.
 
-## Prerequisites
+
+
+## Prerequisites for Heroku setup
 + Heroku CLI
 + Node.js
 + express-generator
 
 
-## Installation & Run on heroku
+## Installation & Run on Heroku
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
