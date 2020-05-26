@@ -7,5 +7,32 @@ This is a simple app to ask for a valid identifier during the Access Journey (su
 + express-generator
 
 
+## Installation & Run on heroku
 
+```sh
+# Remove .git folder and start again
+rm -rf .git
+
+# Start a new repo
+git init
+
+# Create Heroku App
+heroku create myApp
+
+# Install dependencies
+npm install
+
+#Add repo files
+git add .
+
+# Commit changes
+git commit -m 'Initial commit'
+
+#Push Boilerplate to Heroku
+git push heroku master
+
+#Open Heroku App
+heroku open
+
+```
 
