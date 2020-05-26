@@ -5,64 +5,65 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-<h1>Insert your ticket</h1>
-<!-- our form -->
-<form id='userForm'>
-<div><input type='text' name='ticket' placeholder='Name' /></div>
-</div>
-<div><input type='submit' value='Submit' /></div>
-</form>
-<style type="text/css">
-table {
-border-collapse: collapse;
-}
 
-table, th, td {
-border: 1px solid black;
-}
+  <h1>Insert your ticket</h1>
 
-</style>
-<!-- where the response will be displayed -->
-<div id='response'></div>
+  <!-- our form -->
+  <form id='userForm'>
+    <div>
+      <input type='text' name='ticket' placeholder='Name' /></div>
+    <div>
+      <input type='submit' value='Submit' />
+    </div>
+  </form>
+
+  <!-- where the response will be displayed -->
+  <div id='response'></div>
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
+
 <script>
 $(document).ready(function(){
-$('#userForm').submit(function(){
 
-// show that something is loading
-$('#response').html("<b>Loading response...</b>");
+  $('#userForm').submit(function(){
 
-// Call ajax for pass data to other place
-$.ajax({
-type: 'POST',
-url: '/validate',
-data: $(this).serialize() // getting filed value in serialize form
-})
-.done(function(data){ // if getting done then call.
+  // show that something is loading
+  $('#response').html("<b>Loading response...</b>");
 
-var obj = JSON.parse(data);
+  // Call ajax for pass data to other place
+  $.ajax({
+  type: 'POST',
+  url: '/validate',
+  async: false,
+  data: $(this).serialize() // getting filed value in serialize form
+  })
+  .done(function(data){ // if getting done then call.
 
-  if (obj.status == 'valid') {
-$('#response').html('Thanks. Redirecting in 3 sec');
-  }
-else {
-  console.log(obj);
-  $('#response').html('Ticket is not valid');
-}
+    console.log("data:" + data);
 
+    if (data == 'valid') {
+      $('#response').html('Thanks. Redirecting in 3 sec');
+    }
+    else {
+      console.log("invalid " + data);
+      $('#response').html('Ticket is not valid');
+    }
 
-})
-.fail(function() { // if fail then getting message
+  })
+  .fail(function() { // if fail then getting message
 
-// just in case posting your form failed
-alert( "Posting failed." );
+  // just in case posting your form failed
+  alert( "Posting failed." );
 
-});
+  });
 
-// to prevent refreshing the whole page page
-return false;
+  // to prevent refreshing the whole page page
+  return false;
 
-});
+  });
+
 });
 </script>
 
